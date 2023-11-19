@@ -12,6 +12,7 @@ struct DataTime {
 };
 
 struct Check {
+
 	string name;
 	string adress;
 	string goodsname;
@@ -23,23 +24,19 @@ struct Check {
 	float netto{};
 	float surrenders{};
 	unsigned int TSEnummer{};
-};
-
-struct CheckDataTime {
 	DataTime now;
-	Check today;
 };
 
-void InfoChek(CheckDataTime& p)
+void InfoChek(Check& p)
 {
 	cout << "Enter shop name:";
-	cin >> p.today.name;
+	cin >> p.name;
 
 	cout << "Enter adress: ";
-	cin >> p.today.adress;
+	cin >> p.adress;
 
 	cout << "Enter idex: ";
-	cin >> p.today.index;
+	cin >> p.index;
 
 	cout << "Enter day:";
 	cin >> p.now.day;
@@ -79,10 +76,10 @@ void InfoChek(CheckDataTime& p)
 	}
 
 	cout << "Enter product name: ";
-	cin >> p.today.goodsname;
+	cin >> p.goodsname;
 
 	cout << "Enter price: ";
-	cin >> p.today.price;
+	cin >> p.price;
 
 	if (p.now.month < 0)
 	{
@@ -91,25 +88,25 @@ void InfoChek(CheckDataTime& p)
 	}
 
 	cout << "Enter your money: ";
-	cin >> p.today.mymoney;
+	cin >> p.mymoney;
 
-	if (p.today.mymoney < p.today.price)
+	if (p.mymoney < p.price)
 	{
 		cout << "Oops, inccorrect value for your money!\n";
 		throw "ERROR MONEY!";
 	}
 
 	cout << "Enter Transaction number: ";
-	cin >> p.today.TSEnummer;
+	cin >> p.TSEnummer;
 
-	if (p.today.TSEnummer < 0)
+	if (p.TSEnummer < 0)
 	{
 		cout << "Oops, inccorrect value for Transaction number!\n";
 		throw "ERROR TRANSACTION NUMBER!";
 	}
 
 	cout << "Enter MWST in %: ";
-	cin >> p.today.MWST;
+	cin >> p.MWST;
 
 	int a = (14 - p.now.month) / 12;
 	int y = p.now.year - a;
@@ -118,33 +115,26 @@ void InfoChek(CheckDataTime& p)
 
 	string weekdays[] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 	p.now.weekday = weekdays[wd];
-	p.today.wm = (p.today.price / 100) * p.today.MWST;
-	p.today.netto = p.today.price - p.today.wm;
-	p.today.surrenders = p.today.price - p.today.mymoney;
+	p.wm = (p.price / 100) * p.MWST;
+	p.netto = p.price - p.wm;
+	p.surrenders = p.price - p.mymoney;
 }
 
-void PrintCheck(const CheckDataTime& p)
+void PrintCheck(const Check& p)
 {
-	cout << "\t" << p.today.name << "\n";
-	cout << "\t" << p.today.adress << "\n";
-	cout << "\t" << p.today.index << "\n";
-	cout << "\t" << p.today.goodsname << "\n";
+	cout << "\t" << p.name << "\n";
+	cout << "\t" << p.adress << "\n";
+	cout << "\t" << p.index << "\n";
+	cout << "\t" << p.goodsname << "\n";
 	cout << "\t";
-	printf("Price: %.0f $", p.today.price);
-	cout << "\n\t";
-	printf("Your money: %.2f $", p.today.mymoney);
-	cout << "\n\t";
-	printf( "Netto: %.2f", p.today.netto);
-	cout << "\t";
-	printf("Brutto: %.2f", p.today.price);
-	cout << "\n\t";
-	printf("MWST: %.2f", p.today.wm);
-	cout << "\n\t";
-	printf("Surrenders: %.2f $", p.today.surrenders);
-	cout << "\n\t";
-	cout <<"TSE: " << p.today.TSEnummer << "\n";
-	cout << "\t";
-	cout <<"Date: " << p.now.weekday << ", ";
+	printf("Price: %.0f $ \n\t", p.price);
+	printf("Your money: %.2f $\n\t", p.mymoney);
+	printf( "Netto: %.2f\n\t", p.netto);
+	printf("Brutto: %.2f\n\t", p.price);
+	printf("MWST: %.2f\n\t", p.wm);
+	printf("Surrenders: %.2f $\n\t", p.surrenders);
+	cout <<"TSE: " << p.TSEnummer << "\n";
+	cout<<"\t" << "Date: " << p.now.weekday << ", ";
 	printf("%02d.%02d.%04d", p.now.day, p.now.month, p.now.year);
 	cout << "\n\t";
 	cout << "Time: " << p.now.hour << ":" << p.now.minuts;
@@ -152,7 +142,7 @@ void PrintCheck(const CheckDataTime& p)
 
 int main()
 {
-	CheckDataTime now;
+	Check now;
 	InfoChek(now);
 	PrintCheck(now);
 }
