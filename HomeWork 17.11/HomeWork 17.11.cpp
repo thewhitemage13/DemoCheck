@@ -125,19 +125,32 @@ void PrintCheck(const Check& p)
 	cout << "\t" << p.name << "\n";
 	cout << "\t" << p.adress << "\n";
 	cout << "\t" << p.index << "\n";
-	cout << "\t" << p.goodsname << "\n";
+	cout << "\t" << p.goodsname;
 	cout << "\t";
-	printf("Price: %.2f $ \n\t", p.price);
-	printf("Your money: %.2f $\n\t", p.mymoney);
-	printf( "Netto: %.2f\n\t", p.netto);
-	printf("Brutto: %.2f\n\t", p.price);
-	printf("MWST: %.2f\n\t", p.wm);
-	printf("Surrenders: %.2f $\n\t", p.surrenders);
-	cout <<"TSE: " << p.TSEnummer << "\n";
-	cout<<"\t" << "Date: " << p.now.weekday << ", ";
+	printf("%.2f $ \n\t", p.price);
+	cout << "-------------------------------------"<<"\n\t";
+	printf("Price:          %.2f $ \n\t", p.price);
+	printf("Your money:     %.2f $\n\t", p.mymoney);
+	printf("Surrenders:    %.2f $\n\t", p.surrenders);
+	cout << "-------------------------------------" << "\n\t";
+	cout << "MWST%   MWST   +   NETTO   =   BRUTTO" << "\n\t";
+	cout << p.MWST<< "%" << "\t";
+	printf("%.2f\t", p.wm);
+	printf("   %.2f\t\t", p.netto);
+	printf("%.2f\t\n", p.price);
+	cout << "\t";
+	cout << "Summ: " << "\t";
+	printf("%.2f\t", p.wm);
+	printf("   %.2f\t\t", p.netto);
+	printf("%.2f\t\n", p.price);
+	cout << "\t";
+	cout << "-------------------------------------" << "\n\t";
+	cout <<"TSE: " << p.TSEnummer << "\n\t";
+	cout << "-------------------------------------" << "\n\t";
+	cout<< p.now.weekday << ", ";
 	printf("%02d.%02d.%04d", p.now.day, p.now.month, p.now.year);
-	cout << "\n\t";
-	cout << "Time: " << p.now.hour << ":" << p.now.minuts;
+	cout << "\t";
+	cout << "Time: " << p.now.hour << ":" << p.now.minuts<<"\n";
 }
 
 int main()
