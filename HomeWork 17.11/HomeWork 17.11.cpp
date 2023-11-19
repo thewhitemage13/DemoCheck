@@ -127,7 +127,7 @@ void PrintCheck(const Check& p)
 	cout << "\t" << p.index << "\n";
 	cout << "\t" << p.goodsname << "\n";
 	cout << "\t";
-	printf("Price: %.0f $ \n\t", p.price);
+	printf("Price: %.2f $ \n\t", p.price);
 	printf("Your money: %.2f $\n\t", p.mymoney);
 	printf( "Netto: %.2f\n\t", p.netto);
 	printf("Brutto: %.2f\n\t", p.price);
